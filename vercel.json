@@ -1,14 +1,14 @@
 {
-  "version": 2,
-  "functions": {
-    "api/*.php": {
-      "runtime": "vercel-php@0.6.2"
-    }
-  },
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    }
-  ]
+    "version": 2,
+    "functions": {
+        "api/**.php": {
+                  "runtime": "vercel-php@0.8.2"
+        }
+    },
+    "routes": [
+        {
+            "src": "/fetch_data50_open_price",
+            "dest": "/api/fetch_data50_open_price.php"
+        }
+    ]
 }
