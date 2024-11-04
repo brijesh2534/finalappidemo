@@ -1,4 +1,9 @@
 <?php
+// Set CORS headers
+header("Access-Control-Allow-Origin: *"); // Allow all domains
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS"); // Allow GET and POST requests
+header("Access-Control-Allow-Headers: Content-Type"); // Allow specific headers
+
 // Define the URL for the NSE API
 $url = "https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20500";
 
