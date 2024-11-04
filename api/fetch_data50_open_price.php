@@ -1,8 +1,12 @@
 <?php
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Set CORS headers
-header("Access-Control-Allow-Origin: *"); // Allow all domains
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS"); // Allow GET and POST requests
-header("Access-Control-Allow-Headers: Content-Type"); // Allow specific headers
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 
 // Define the URL for the NSE API
 $url = "https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20500";
