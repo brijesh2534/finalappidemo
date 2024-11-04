@@ -1,24 +1,18 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "api/*.php",
-        "use": "@vercel/php"
-      },
-      {
-        "src": "index.html",
-        "use": "@vercel/static"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "api/$1.php"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "index.html"
-      }
-    ]
+  "version": 2,
+  "routes": [
+    {
+      "src": "/fetch_data50_open_price.php",
+      "dest": "/api/fetch_data50_open_price.php"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
+    }
+  ],
+  "functions": {
+    "api/*.php": {
+      "runtime": "php-8.1"  // or any version you prefer
+    }
   }
-  
+}
