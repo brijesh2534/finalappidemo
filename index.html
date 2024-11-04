@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Gainers - NIFTY 50 (Open Price)</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script>
+        function fetchTopGainers() {
+            fetch("/api/fetch_data50_open_price.php") // Updated path to point to the API route
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error(data.error);
+                        return;
+                    }
+                    updateTable(data.topGainers);
+                    updateLastUpdatedTime(data.lastUpdatedTime);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        function updateTable(topGainers) {
+            const tableBody = document.getElementById("gainersTableBody");
+            tableBody.innerHTML = "";
+            topGainers.forEach(stock => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${stock.symbol}</td>
+                    <td>${parseFloat(stock.open).toFixed(2)}</td>
+                    <td>${parseFloat(stock.pChangeOpen).toFixed(2)}%</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function updateLastUpdatedTime(lastUpdatedTime) {
+            const date = new Date(lastUpdatedTime);
+            const options = {
+                year: 'numeric', month: 'long', day: 'numeric',
+                hour: 'numeric', minute: 'numeric',
+                second: 'numeric', hour12: true
+            };
+            const formattedDate = date.toLocaleString("en-US", options);
+            document.getElementById("lastUpdatedTime").innerText = `Last Updated: ${formattedDate}`;
+        }
+
+        // Fetch data every 5 seconds
+        setInterval(fetchTopGainers, 5000);
+
+        // Initial fetch
+        window.onload = fetchTopGainers;
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">Top 10 Gainers - NIFTY 50 (Open Price)</h1>
+    <p style="text-align: center;" id="lastUpdatedTime">Last Updated: --:--:--</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Stock Name</th>
+                <th>Open Price (₹)</th>
+                <th>% Change from Open</th>
+            </tr>
+        </thead>
+        <tbody id="gainersTableBody">
+            <!-- Data will be populated here by JavaScript -->
+        </tbody>
+    </table>
+</body>
+</html>
