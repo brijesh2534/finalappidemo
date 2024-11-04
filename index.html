@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top 10 Gainers - NIFTY 50 (Open Pricee)</title>
+    <title>Top 10 Gainers - NIFTY 50 (Open Price)</title>
     <style>
         table {
             width: 50%;
@@ -21,10 +21,9 @@
     </style>
     <script>
         function fetchTopGainers() {
-            fetch("/api/fetch_data50_open_price.php") // Adjust the URL as needed
+            fetch("/api/fetch_data50_open_price.php") // Adjust the path according to your deployment
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data); // Log the data to see what is being returned
                     if (data.error) {
                         console.error(data.error);
                         return;
@@ -62,7 +61,6 @@
 
         // Fetch data every 5 seconds
         setInterval(fetchTopGainers, 5000);
-
         // Initial fetch
         window.onload = fetchTopGainers;
     </script>
